@@ -94,3 +94,21 @@ struct Celsius1 {
 
 let bodyTemperature = Celsius1(37.0)
 
+
+//MARK: Опциональные типы свойств
+print("\n//Опциональные типы свойств")
+
+class SurveyQuestion {
+    var text: String
+    var response: String?
+    init(text: String) {
+        self.text = text
+    }
+    func ask() {
+        print(text)
+    }
+}
+let cheeseQuestion = SurveyQuestion(text: "Нравится ли вам сыр?")
+cheeseQuestion.ask()
+print(cheeseQuestion.response)
+cheeseQuestion.response = "Да, я люблю сыр"
