@@ -112,3 +112,21 @@ let cheeseQuestion = SurveyQuestion(text: "Нравится ли вам сыр?"
 cheeseQuestion.ask()
 print(cheeseQuestion.response)
 cheeseQuestion.response = "Да, я люблю сыр"
+
+
+//MARK: Присваивание значений постоянным свойствам во время инициализации
+print("\n//Присваивание значений постоянным свойствам во время инициализации")
+
+class SurveyQuestion1 {
+  let text: String
+  var response: String?
+  init(text: String) {
+    self.text = text
+  }
+  func ask() {
+    print(text)
+  }
+}
+let beetsQuestion = SurveyQuestion1(text: "Что насчет свеклы?")
+beetsQuestion.ask()
+beetsQuestion.response = "Я люблю свеклу, но не в сыром виде!"
