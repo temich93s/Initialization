@@ -76,3 +76,21 @@ let magenta = Color(red: 1.0, green: 0.0, blue: 1.0)
 let halfGray = Color(white: 0.5)
 
 
+//MARK: Параметры инициализатора без внешних имен
+print("\n//Параметры инициализатора без внешних имен")
+
+struct Celsius1 {
+    var temperatureInCelsius: Double
+    init(fromFahrenheit fahrenheit: Double) {
+        temperatureInCelsius = (fahrenheit - 32.0) / 1.8
+    }
+    init(fromKelvin kelvin: Double) {
+        temperatureInCelsius = kelvin - 273.15
+    }
+    init(_ celsius: Double) {
+        temperatureInCelsius = celsius
+    }
+}
+
+let bodyTemperature = Celsius1(37.0)
+
