@@ -142,3 +142,12 @@ class ShoppingListItem {
 }
 var item = ShoppingListItem()
 print(item.name, item.quantity, item.purchased)
+
+
+//MARK: Почленные инициализаторы структурных типов
+print("\n//Почленные инициализаторы структурных типов")
+
+struct Size {
+    var width = 0.0, height = 0.0
+}
+let twoByTwo = Size(width: 2.0, height: 2.0)
