@@ -130,3 +130,15 @@ class SurveyQuestion1 {
 let beetsQuestion = SurveyQuestion1(text: "Что насчет свеклы?")
 beetsQuestion.ask()
 beetsQuestion.response = "Я люблю свеклу, но не в сыром виде!"
+
+
+//MARK: Дефолтные инициализаторы
+print("\n//Дефолтные инициализаторы")
+
+class ShoppingListItem {
+    var name: String?
+    var quantity = 1
+    var purchased = false
+}
+var item = ShoppingListItem()
+print(item.name, item.quantity, item.purchased)
