@@ -213,3 +213,67 @@ class Bicycle: Vehicle {
 
 let bicycle = Bicycle()
 print("Велосипед: \(bicycle.description)")
+
+
+//MARK: Назначенные и вспомогательные инициализаторы в действии
+print("\n//Назначенные и вспомогательные инициализаторы в действии")
+
+class Food {
+    var name: String
+    init(name: String) {
+        self.name = name
+    }
+    convenience init() {
+        self.init(name: "[Unnamed]")
+    }
+}
+
+let namedMeat = Food(name: "Бекон")
+print(namedMeat.name)
+
+let mysteryMeat = Food()
+print(mysteryMeat.name)
+
+class RecipeIngredient: Food {
+    var quantity: Int
+    init(name: String, quantity: Int) {
+        self.quantity = quantity
+        super.init(name: name)
+    }
+    override convenience init(name: String) {
+        self.init(name: name, quantity: 1)
+    }
+}
+
+let oneMysteryItem = RecipeIngredient()
+print(oneMysteryItem.name, oneMysteryItem.quantity)
+let oneBacon = RecipeIngredient(name: "Bacon")
+print(oneBacon.name, oneBacon.quantity)
+let sixEggs = RecipeIngredient(name: "Eggs", quantity: 6)
+print(sixEggs.name, sixEggs.quantity)
+
+class ShoppingListItem1: RecipeIngredient {
+    var purchased = false
+    var description: String {
+        var output = "\(quantity) x \(name)"
+        output += purchased ? " ✔" : " ✘"
+        return output
+    }
+}
+
+var breakfastList = [
+    ShoppingListItem1(),
+    ShoppingListItem1(name: "Bacon"),
+    ShoppingListItem1(name: "Eggs", quantity: 6)
+]
+
+for item in breakfastList {
+    print(item.description)
+}
+
+breakfastList[0].name = "Orange juice"
+breakfastList[0].purchased = true
+
+for item in breakfastList {
+    print(item.description)
+}
