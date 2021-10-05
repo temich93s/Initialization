@@ -323,3 +323,34 @@ if anonymousCreature == nil {
 }
 // Выведет "Неизвестное животное не может быть инициализировано"
 
+
+//MARK: Проваливающиеся инициализаторы для перечислений
+print("\n//Проваливающиеся инициализаторы для перечислений")
+
+enum TemperatureUnit {
+    case kelvin, celsius, fahrenheit
+    init?(symbol: Character) {
+        switch symbol {
+        case "K":
+            self = .kelvin
+        case "C":
+            self = .celsius
+        case "F":
+            self = .fahrenheit
+        default:
+            return nil
+        }
+    }
+}
+
+let fahrenheitUnit = TemperatureUnit(symbol: "F")
+if fahrenheitUnit != nil {
+  print("Эта единица измерения температуры определена, а значит наша инициализация прошла успешно!")
+}
+// Выведет "Эта единица измерения температуры определена, а значит наша инициализация прошла успешно!"
+ 
+let unknownUnit = TemperatureUnit(symbol: "X")
+if  unknownUnit == nil {
+  print("Единица измерения температуры не определена, таким образом мы зафейлили инициализацию")
+}
+// Выведет "Единица измерения температуры не определена, таким образом мы зафейлили инициализацию"
