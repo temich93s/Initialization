@@ -420,3 +420,56 @@ if let oneUnnamed = CartItem(name: "", quantity: 1) {
     print("Невозможно инициализировать товар без имени")
 }
 // Выведет "Невозможно инициализировать товар без имени"
+
+
+//MARK: Переопределение проваливающегося инициализатора
+print("\n//Переопределение проваливающегося инициализатора")
+
+class Document {
+    var name: String?
+    //этот инициализатор создает документ со значением nil свойства name
+    init(){}
+    //этот инициализатор создает документ с не пустым свойством name
+    init?(name: String) {
+      if name.isEmpty { return nil }
+      self.name = name
+    }
+}
+
+class AutomaticallyNamedDocument: Document {
+    override init() {
+        super.init()
+        self.name = "[Untitled]"
+    }
+    override init(name: String) {
+        super.init()
+        if name.isEmpty {
+            self.name = "[Untitled]"
+        } else {
+            self.name = name
+        }
+    }
+}
+
+class UntitledDocument: Document {
+    override init() {
+        super.init(name: "[Untitled]")!
+    }
+}
+
+var document1 = Document()
+print(document1.name)
+var document2 = Document(name: "")
+print(document2?.name)
+var document3 = Document(name: "Book")
+print(document3?.name)
+
+var document4 = AutomaticallyNamedDocument()
+print(document4.name)
+var document5 = AutomaticallyNamedDocument(name: "")
+print(document5.name)
+var document6 = AutomaticallyNamedDocument(name: "Book")
+print(document6.name)
+
+var document7 = UntitledDocument()
+print(document7.name)
