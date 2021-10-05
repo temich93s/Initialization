@@ -189,3 +189,27 @@ print(originRect.origin, originRect.size)
 let centerRect = Rect1(center: Point1(x: 4.0, y: 4.0), size: Size1(width: 3.0, height: 3.0))
 print(centerRect.origin, centerRect.size)
 //исходная точка centerRect’а равна (2.5, 2.5) и его размер (3.0, 3.0)
+
+
+//MARK: Наследование и переопределение инициализатора
+print("\n//Наследование и переопределение инициализатора")
+
+class Vehicle {
+    var numberOfWheels = 0
+    var description: String {
+        return "\(numberOfWheels) колес(а)"
+    }
+}
+
+let vehicle = Vehicle()
+print("Транспортное средство: \(vehicle.description)")
+
+class Bicycle: Vehicle {
+    override init() {
+        super.init()
+        numberOfWheels = 2
+    }
+}
+
+let bicycle = Bicycle()
+print("Велосипед: \(bicycle.description)")
