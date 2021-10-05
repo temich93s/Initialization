@@ -277,3 +277,49 @@ breakfastList[0].purchased = true
 for item in breakfastList {
     print(item.description)
 }
+
+
+//MARK: Проваливающиеся инициализаторы
+print("\n//Проваливающиеся инициализаторы")
+
+let wholeNumber: Double = 12345.0
+let pi = 3.14159
+ 
+if let valueMaintained = Int(exactly: wholeNumber) {
+    print("\(wholeNumber) преобразование в Int поддерживает значение \(valueMaintained)")
+}
+// Выведет "12345.0 преобразование в Int поддерживает значение 12345"
+ 
+let valueChanged = Int(exactly: pi)
+// valueChanged is of type Int?, not Int
+ 
+if valueChanged == nil {
+    print("\(pi) преобразование в Int невозможно")
+}
+// Выведет "3.14159 преобразование в Int невозможно"
+
+
+struct Animal {
+    let species: String
+    init?(species: String) {
+        if species.isEmpty { return nil }
+        self.species = species
+    }
+}
+
+let someCreature = Animal(species: "Жираф")
+// someCreature имеет тип Animal?, но не Animal
+ 
+if let giraffe = someCreature {
+ print("Мы инициализировали животное типа \(giraffe.species) ")
+}
+// Выведет "Мы инициализировали животное типа Жираф "
+
+let anonymousCreature = Animal(species: "")
+// anonymousCreature имеет тип Animal?, но не Animal
+ 
+if anonymousCreature == nil {
+    print("Неизвестное животное не может быть инициализировано")
+}
+// Выведет "Неизвестное животное не может быть инициализировано"
+
