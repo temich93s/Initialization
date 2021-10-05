@@ -151,3 +151,41 @@ struct Size {
     var width = 0.0, height = 0.0
 }
 let twoByTwo = Size(width: 2.0, height: 2.0)
+
+
+//MARK: Делегирование инициализатора для типов значения
+print("\n//Делегирование инициализатора для типов значения")
+
+struct Size1 {
+    var width = 0.0, height = 0.0
+}
+struct Point1 {
+    var x = 0.0, y = 0.0
+}
+
+struct Rect1 {
+    var origin = Point1()
+    var size = Size1()
+    init() {}
+    init(origin: Point1, size: Size1) {
+        self.origin = origin
+        self.size = size
+    }
+    init(center: Point1, size: Size1) {
+        let originX = center.x - (size.width / 2)
+        let originY = center.y - (size.height / 2)
+        self.init(origin: Point1(x: originX, y: originY), size: size)
+    }
+}
+
+let basicRect = Rect1()
+print(basicRect.origin, basicRect.size)
+//исходная точка Rect (0.0, 0.0) и его размер (0.0, 0.0)
+
+let originRect = Rect1(origin: Point1(x: 2.0, y: 2.0), size: Size1(width: 5.0, height: 5.0))
+print(originRect.origin, originRect.size)
+//исходная точка Rect (2.0, 2.0) и его размер (5.0, 5.0)
+
+let centerRect = Rect1(center: Point1(x: 4.0, y: 4.0), size: Size1(width: 3.0, height: 3.0))
+print(centerRect.origin, centerRect.size)
+//исходная точка centerRect’а равна (2.5, 2.5) и его размер (3.0, 3.0)
