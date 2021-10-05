@@ -473,3 +473,33 @@ print(document6.name)
 
 var document7 = UntitledDocument()
 print(document7.name)
+
+
+//MARK: Требуемые инициализаторы
+print("\n//Требуемые инициализаторы")
+
+class SomeClass {
+    var name: String
+    required init() {
+        name = "SomeClass"
+    }
+}
+
+class SomeSubclass1: SomeClass {
+    required init() {
+        super.init()
+        self.name = "SomeSubclass1"
+    }
+}
+
+class SomeSubclass2: SomeSubclass1 {
+}
+
+var someObject1 = SomeClass()
+print(someObject1.name)
+
+var someObject2 = SomeSubclass1()
+print(someObject2.name)
+
+var someObject3 = SomeSubclass2()
+print(someObject3.name)
