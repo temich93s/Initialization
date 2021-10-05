@@ -345,13 +345,13 @@ enum TemperatureUnit {
 
 let fahrenheitUnit = TemperatureUnit(symbol: "F")
 if fahrenheitUnit != nil {
-    print("Эта единица измерения температуры определена, а значит наша инициализация прошла успешно!")
+  print("Эта единица измерения температуры определена, а значит наша инициализация прошла успешно!")
 }
 // Выведет "Эта единица измерения температуры определена, а значит наша инициализация прошла успешно!"
-
+ 
 let unknownUnit = TemperatureUnit(symbol: "X")
 if  unknownUnit == nil {
-    print("Единица измерения температуры не определена, таким образом мы зафейлили инициализацию")
+  print("Единица измерения температуры не определена, таким образом мы зафейлили инициализацию")
 }
 // Выведет "Единица измерения температуры не определена, таким образом мы зафейлили инициализацию"
 
@@ -374,3 +374,49 @@ if  unknownUnit1 == nil {
     print("Единица измерения температуры не определена, таким образом мы зафейлили инициализацию.")
 }
 // Выведет "Единица измерения температуры не определена, таким образом мы зафейлили инициализацию."
+
+
+//MARK: Распространение проваливающегося инициализатора
+print("\n//Распространение проваливающегося инициализатора")
+
+class Product {
+    let name: String
+    init?(name: String) {
+        if name.isEmpty {
+            print("ERROR: init?(name: String)")
+            return nil
+        }
+        self.name = name
+    }
+}
+ 
+class CartItem: Product {
+    let quantity: Int
+    init?(name: String, quantity: Int) {
+        if quantity < 1 {
+            print("ERROR: init?(name: String, quantity: Int)")
+            return nil
+        }
+        self.quantity = quantity
+        super.init(name: name)
+    }
+}
+
+if let twoSocks = CartItem(name: "sock", quantity: 2) {
+    print("Item: \(twoSocks.name), quantity: \(twoSocks.quantity)")
+}
+// Выведет "Item: sock, quantity: 2"
+
+if let zeroShirts = CartItem(name: "shirt", quantity: 0) {
+    print("Item: \(zeroShirts.name), quantity: \(zeroShirts.quantity)")
+} else {
+    print("Невозможно инициализировать ноль футболок")
+}
+// Выведет "Невозможно инициализировать ноль футболок"
+
+if let oneUnnamed = CartItem(name: "", quantity: 1) {
+    print("Item: \(oneUnnamed.name), quantity: \(oneUnnamed.quantity)")
+} else {
+    print("Невозможно инициализировать товар без имени")
+}
+// Выведет "Невозможно инициализировать товар без имени"
