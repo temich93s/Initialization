@@ -503,3 +503,33 @@ print(someObject2.name)
 
 var someObject3 = SomeSubclass2()
 print(someObject3.name)
+
+
+//MARK: Начальное значение свойства в виде функции или замыкания
+print("\n//Начальное значение свойства в виде функции или замыкания")
+
+struct Chessboard {
+    let boardColors: [Bool] = {
+        var temporaryBoard = [Bool]()
+        var isBlack = false
+        for i in 1...8 {
+            for j in 1...8 {
+                temporaryBoard.append(isBlack)
+                print("\(isBlack)", terminator: " ")
+                isBlack = !isBlack
+            }
+            print()
+            isBlack = !isBlack
+        }
+        return temporaryBoard
+    }()
+    func squareIsBlackAt(row: Int, column: Int) -> Bool {
+        return boardColors[(row * 8) + column]
+    }
+}
+
+let board = Chessboard()
+print(board.squareIsBlackAt(row: 0, column: 1))
+// Выведет "true"
+print(board.squareIsBlackAt(row: 7, column: 7))
+// Выведет "false"
